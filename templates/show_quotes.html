@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+  {% if session.logged_in %}
+    <form action="{{ url_for('add_quote') }}" method=post class=add-quote-form>
+      <label>Quote</label>
+      <textarea name="quote" rows="5" class="input-xxlarge" placeholder="Enter a quote here..." required></textarea>
+      <label>Author</label>
+      <input type="text" name="author" class="input-xxlarge" placeholder="Author (i.e., source of quote)" required>
+      <div class="control-group">
+        <div class="controls">
+          <button type="submit" class="btn btn-primary">Add quote</button>
+        </div>
+      </div>
+    </form>
+  {% endif %}
+  <div class=quotes>
+  {% for q in quotes %}
+    <blockquote>
+      <p>{{ q.quote|safe }}</p>
+      <small><cite title="{{q.author}}">{{ q.author }}</small>
+    </blockquote>
+  {% else %}
+    <em>No quotes found. How about adding some?</em>
+  {% endfor %}
+  </div>
+{% endblock %}
