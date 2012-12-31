@@ -2,6 +2,8 @@ import sqlite3
 from contextlib import closing
 from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash
+import re
+from jinja2 import evalcontextfilter, Markup, escape
 
 # configuration
 DATABASE = 'db/quotr.db'
@@ -42,7 +44,7 @@ def teardown_request(exception):
 # views
 @app.route('/')
 def show_quotes():
-    quotes = query_db('SELECT quote, author FROM quotes ORDER BY id DESC')
+    quotes = query_db('SELECT id, quote, author FROM quotes ORDER BY id DESC')
     return render_template('show_quotes.html', quotes=quotes)
 
 @app.route('/add', methods=['POST'])
@@ -74,6 +76,17 @@ def logout():
     session.pop('logged_in', None)
     flash('Logout successful.')
     return redirect(url_for('show_quotes'))
+
+_paragraph_re = re.compile(r'(?:\r\n|\r|\n){2,}')
+
+@app.template_filter()
+@evalcontextfilter
+def nl2br(eval_ctx, value):
+    result = u'\n\n'.join(u'<p>%s</p>' % p.replace('\n', '<br>\n') \
+        for p in _paragraph_re.split(escape(value)))
+    if eval_ctx.autoescape:
+        result = Markup(result)
+    return result
 
 if __name__ == '__main__':
     app.run()

@@ -16,8 +16,10 @@
   <div class="quotes">
   {% for q in quotes %}
     <blockquote>
-      <p>{{ q.quote|safe }}</p>
+      <a class="plain-link" href="/quote/{{q.id}}">
+      <p>{{ q.quote|safe|nl2br }}</p>
       <small><cite title="{{q.author}}">{{ q.author }}</small>
+      </a>
     </blockquote>
   {% else %}
     <em>No quotes found. How about adding some?</em>

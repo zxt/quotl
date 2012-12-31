@@ -37,3 +37,13 @@ blockquote {
 .add-quote-form {
   border-bottom: 1px solid #ccc;
 }
+
+.plain-link {
+  color: #333;
+  text-decoration: none;
+}
+
+.plain-link:hover {
+  color: #08C;
+  text-decoration: none;
+}
