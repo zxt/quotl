@@ -47,3 +47,13 @@ blockquote {
   color: #08C;
   text-decoration: none;
 }
+
+.quote {
+  text-align: center;
+  border: none;
+}
+
+.quote p {
+  font-size: 32px;
+  line-height: 36px;
+}

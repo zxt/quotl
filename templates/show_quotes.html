@@ -16,7 +16,7 @@
   <div class="quotes">
   {% for q in quotes %}
     <blockquote>
-      <a class="plain-link" href="/quote/{{q.id}}">
+      <a class="plain-link" href="/quotes/{{q.id}}">
       {{ q.quote|safe|nl2br }}
       <small><cite title="{{q.author}}">{{ q.author }}</small>
       </a>

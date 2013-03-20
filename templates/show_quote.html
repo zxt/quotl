@@ -1,0 +1,7 @@
+{% extends "layout.html" %}
+{% block content %}
+    <blockquote class="quote">
+      {{ q.quote|safe|nl2br }}
+      <small><cite title="{{q.author}}">{{ q.author }}</small>
+    </blockquote>
+{% endblock %}

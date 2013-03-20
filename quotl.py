@@ -43,7 +43,12 @@ def teardown_request(exception):
 
 # views
 @app.route('/')
-def show_quotes():
+@app.route('/quotes/')
+@app.route('/quotes/<int:quote_id>')
+def show_quotes(quote_id=None):
+    if quote_id:
+        quote = query_db('SELECT id, quote, author FROM quotes WHERE id = ?', [quote_id], one=True)
+        return render_template('show_quote.html', q=quote)
     quotes = query_db('SELECT id, quote, author FROM quotes ORDER BY id DESC')
     return render_template('show_quotes.html', quotes=quotes)
 
