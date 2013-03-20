@@ -1,2 +1,2 @@
-from quotr import init_db
+from quotl import init_db
 init_db()

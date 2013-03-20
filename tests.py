@@ -1,19 +1,19 @@
 import os
 import unittest
 import tempfile
-import quotr
+import quotl
 
-class QuotrTestCase(unittest.TestCase):
+class QuotlTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.db_fd, quotr.app.config['DATABASE'] = tempfile.mkstemp()
-        quotr.app.config['TESTING'] = True
-        self.app = quotr.app.test_client()
-        quotr.init_db()
+        self.db_fd, quotl.app.config['DATABASE'] = tempfile.mkstemp()
+        quotl.app.config['TESTING'] = True
+        self.app = quotl.app.test_client()
+        quotl.init_db()
 
     def tearDown(self):
         os.close(self.db_fd)
-        os.unlink(quotr.app.config['DATABASE'])
+        os.unlink(quotl.app.config['DATABASE'])
 
     def login(self, username, password):
         return self.app.post('/login', data=dict(
@@ -29,13 +29,13 @@ class QuotrTestCase(unittest.TestCase):
         assert 'No quotes found. How about adding some?' in rv.data
 
     def test_login_logout(self):
-        rv = self.login(quotr.app.config['USERNAME'], quotr.app.config['PASSWORD'])
+        rv = self.login(quotl.app.config['USERNAME'], quotl.app.config['PASSWORD'])
         assert 'Login successful' in rv.data
         rv = self.logout()
         assert 'Logout successful' in rv.data
-        rv = self.login('invalidusername', quotr.app.config['PASSWORD'])
+        rv = self.login('invalidusername', quotl.app.config['PASSWORD'])
         assert 'Invalid username' in rv.data
-        rv = self.login(quotr.app.config['USERNAME'], 'invalidpassword')
+        rv = self.login(quotl.app.config['USERNAME'], 'invalidpassword')
         assert 'Invalid password' in rv.data
 
     def test_add_quote(self):

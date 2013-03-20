@@ -6,7 +6,7 @@ import re
 from jinja2 import evalcontextfilter, Markup, escape
 
 # configuration
-DATABASE = 'db/quotr.db'
+DATABASE = 'db/quotl.db'
 DEBUG = True
 SECRET_KEY = 'development key'
 USERNAME = 'admin'
@@ -14,7 +14,7 @@ PASSWORD = 'default'
 
 app = Flask(__name__)
 app.config.from_object(__name__)
-app.config.from_envvar('QUOTR_SETTINGS', silent=True)
+app.config.from_envvar('QUOTL_SETTINGS', silent=True)
 
 # database
 def connect_db():
