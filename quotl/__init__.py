@@ -6,7 +6,7 @@ import re
 from jinja2 import evalcontextfilter, Markup, escape
 
 # configuration
-DATABASE = 'db/quotl.db'
+DATABASE = 'quotl/db/quotl.db'
 DEBUG = True
 SECRET_KEY = 'development key'
 USERNAME = 'admin'
@@ -92,6 +92,3 @@ def nl2br(eval_ctx, value):
     if eval_ctx.autoescape:
         result = Markup(result)
     return result
-
-if __name__ == '__main__':
-    app.run()
