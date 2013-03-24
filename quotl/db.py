@@ -1,5 +1,6 @@
 import sqlite3
 from flask import g
+from contextlib import closing
 from quotl import app
 
 def connect_db():

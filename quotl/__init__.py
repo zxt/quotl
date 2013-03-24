@@ -1,5 +1,4 @@
 from flask import Flask, g
-from contextlib import closing
 
 app = Flask(__name__)
 
